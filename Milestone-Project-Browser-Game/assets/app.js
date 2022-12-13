@@ -3,10 +3,10 @@ let choices = document.getElementById('container');
 var currentPair =[];
 var winCount = 0;
 var seconds = 00;
-var centiseconds = 00;
+var tens = 00;
 var Interval ;
 var appendSeconds = document.getElementById('seconds')
-var appendCentiseconds = document.getElementById('centiseconds')
+var appendTens = document.getElementById('tens')
 var images = ['./images/ant1.jpg','./images/Dolphin.png','./images/Snake.png','./images/ant1.jpg','./images/ant1.jpg'];
 var clone = images.slice(0);
 var cards = images.concat(clone);
@@ -43,7 +43,7 @@ for (var i =0; i<cards.length; i++) {
                 win();
                 currentPair = [];
             } else {
-                check('reverse');
+                checkChoice('reverse');
                 currentPair = [];
             } 
 
@@ -60,30 +60,30 @@ var checkChoice = function(className) {
     },1000);
 }
 
-var winCount = function () {
+var win = function () {
     if(winCount === 5) {
-        clearTimer(timerStart);
-        Text.innerHTML = 'You finished in' + seconds + ':' + centiseconds;
+        clearInterval(Interval);
+        Text.innerHTML = 'You finished in' + seconds + ':' + tens;
     }
 }
 
 function startTimer () {
-    centiseconds++; 
+    tens++; 
       
-    if(centiseconds < 9){
-      appendCentiseconds.innerHTML = "0" + centiseconds;
+    if(tens < 9){
+      appendTens.innerHTML = "0" + tens;
     }
       
-    if (centiseconds > 9){
-      appendCentiseconds.innerHTML = centiseconds;
+    if (tens > 9){
+      appendTens.innerHTML = tens;
         
     } 
       
-    if (centiseconds > 99) {
+    if (tens > 99) {
       seconds++;
       appendSeconds.innerHTML = "0" + seconds;
       tens = 0;
-      appendCentiseconds.innerHTML = "0" + 0;
+      appendTens.innerHTML = "0" + 0;
     }
       
     if (seconds > 9){
