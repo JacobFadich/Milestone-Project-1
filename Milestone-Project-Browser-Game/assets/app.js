@@ -1,35 +1,39 @@
 // making some variables
-let choices = document.getElementById['container'];
+let choices = document.getElementById('container');
 var currentPair =[];
 var winCount = 0;
 var seconds = 00;
 var centiseconds = 00;
+var Interval ;
 var appendSeconds = document.getElementById('seconds')
 var appendCentiseconds = document.getElementById('centiseconds')
-var images = [];
+var images = ['./images/ant1.jpg','./images/Dolphin.png','./images/Snake.png','./images/ant1.jpg','./images/ant1.jpg'];
 var clone = images.slice(0);
 var cards = images.concat(clone);
 
-function shuffle(o){
-    for(var j, x, i=o.length; i; j = Math.floor(Math.random() * i), 
-    x = o[--i], o[i] = o[j], o[j] = x);
-    return o;
+function shuffle(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
 }
 shuffle(cards);
 
 for (var i =0; i<cards.length; i++) {
-    card =document.createElement('div');
+    card = document.createElement('div');
     card.dataset.item = cards[i];
     card.dataset.view = 'card';
-    choices.appendChild();
+    choices.appendChild(card);
 
     card.onclick = function () {
         if (this.className != 'flipped' && this.className != 'correct') {
             this.className = 'flipped';
             var result = this.dataset.item;
-            resultsArray.push(result);
-            clearTimer(timerStart)
-            timerStart = setInterval(setTimer, 10);
+            currentPair.push(result);
+            clearInterval(Interval)
+            Interval = setInterval(startTimer, 10);
         }
 
         if (currentPair.length > 1) {
@@ -75,11 +79,11 @@ function startTimer () {
         
     } 
       
-    if (tens > 99) {
+    if (centiseconds > 99) {
       seconds++;
       appendSeconds.innerHTML = "0" + seconds;
       tens = 0;
-      appendTens.innerHTML = "0" + 0;
+      appendCentiseconds.innerHTML = "0" + 0;
     }
       
     if (seconds > 9){
@@ -89,4 +93,4 @@ function startTimer () {
   }
 
 
-//passing an img into to grid
+
